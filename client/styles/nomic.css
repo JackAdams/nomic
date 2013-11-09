@@ -8,3 +8,16 @@
   font-style: italic;
   font-size: smaller;
 }
+
+.games-list {
+  list-style: none;
+  margin: 25px;
+}
+
+.game {
+  margin-bottom:4px;
+}
+
+#new-game {
+  margin-left: 25px; 
+}

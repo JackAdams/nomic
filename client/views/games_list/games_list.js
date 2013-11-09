@@ -6,6 +6,10 @@ Template.games_list.helpers({
   
   myGames : function() {
     return (Meteor.userId()) ? Games.find({status:"started",players:Meteor.userId()}) : []; 
+  },
+  
+  myGamesCount : function() {
+    return (Meteor.userId()) ? Games.find({status:"started",players:Meteor.userId()}).count() : 0;
   }
   
 });
