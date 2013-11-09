@@ -1,0 +1,15 @@
+<template name="games_list">
+  <h1>Current games</h1>
+  <ul class="games-list">
+    {{#each games}}
+      <li>{{> game}}</li>
+    {{/each}}
+  </ul>
+  <form id="new-game">
+    <input type="text" placeholder="New game" />
+  </form>
+</template>
+
+<template name="game">
+  {{name}}
+</template>
