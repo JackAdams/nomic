@@ -1,0 +1,9 @@
+<template name="game">
+  <span class="game">
+    {{name}}&nbsp;({{playersCount}})
+    <span class="greyed-out">{{instruction}}</span>
+  </span>
+  {{#if canStartGame}}
+    <button class="btn">Start game</button>
+  {{/if}}
+</template>

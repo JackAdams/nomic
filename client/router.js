@@ -1,3 +1,5 @@
+// This is the iron-router smart package in action
+
 Router.configure({
   layoutTemplate: 'layout',
   autoRender: false
@@ -11,7 +13,7 @@ Router.map(function () {
    */
   this.route('home', {
     path: '/',
-    template: 'home',
+    // template: 'home',
 
     load: function () {
       // called on first load
@@ -34,4 +36,17 @@ Router.map(function () {
       }
     ]
   });
+  
+  this.route('play', {
+    path: '/play/:_id',
+    before: [
+      function() {
+        this.subscribe('game', this.params._id).wait();
+      }
+    ],
+    data: function() {
+      return Games.findOne({_id:this.params._id});
+    }
+  });
+  
 });

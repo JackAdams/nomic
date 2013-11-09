@@ -1,0 +1,10 @@
+#login-padding {
+  float:right;
+  padding-right:16px;
+}
+
+.greyed-out {
+  color: #999;
+  font-style: italic;
+  font-size: smaller;
+}

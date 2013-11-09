@@ -1,7 +1,11 @@
 Template.games_list.helpers({
 
-  games : function() {
-    return Games.find();
+  openGames : function() {
+    return Games.find({status:"open"});
+  },
+  
+  myGames : function() {
+    return (Meteor.userId()) ? Games.find({status:"started",players:Meteor.userId()}) : []; 
   }
   
 });
@@ -15,6 +19,7 @@ Template.games_list.events({
     if (name) {
       Games.insert({name:name}); 
     }
+    $(evt.currentTarget).find('input').val('');
   }
   
 });

@@ -1,15 +1,21 @@
 <template name="games_list">
-  <h1>Current games</h1>
-  <ul class="games-list">
-    {{#each games}}
-      <li>{{> game}}</li>
-    {{/each}}
-  </ul>
-  <form id="new-game">
-    <input type="text" placeholder="New game" />
-  </form>
-</template>
-
-<template name="game">
-  {{name}}
+  <div class="games-list">
+    <h1>Games you can join</h1>
+    <ul class="games-list">
+      {{#each openGames}}
+        <li>{{> game}}</li>
+      {{/each}}
+    </ul>
+    <form id="new-game">
+      <input type="text" placeholder="Open a new game" />
+    </form>
+  </div>
+  <div class="games-list">
+    <h1>Games you can play now</h1>
+    <ul class="games-list">
+      {{#each myGames}}
+        <li>{{> game}}
+      {{/each}}
+    </ul>
+  </div>
 </template>
