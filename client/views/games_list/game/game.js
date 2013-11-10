@@ -27,6 +27,10 @@ Template.game.events({
   
   'click .game' : function() {
     if (this.status === 'open') {
+      if (!Nomic.canJoinGame) {
+        alert("Sign in to join game");
+        return; 
+      }
       Games.update({_id:this._id},{$addToSet:{players:Meteor.userId()}});
     }
     else if (Meteor.userId() && this.players && _.contains(this.players,Meteor.userId())) {

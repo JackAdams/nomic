@@ -1,3 +1,9 @@
 <template name="play">
   <h1>{{name}}</h1>
+  Players:
+  <ul>
+    {{#each players}}
+    <li>{{emailAddress}}</li>
+    {{/each}}
+  </ul>
 </template>
