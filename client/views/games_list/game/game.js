@@ -31,7 +31,10 @@ Template.game.events({
         alert("Sign in to join game");
         return; 
       }
-      Games.update({_id:this._id},{$addToSet:{players:Meteor.userId()}});
+      var modifier = (this.players && _.contains(this.players,Meteor.userId())) ? "$pull" : "$addToSet";
+      var fields = {};
+      fields[modifier] = {players:Meteor.userId()};
+      Games.update({_id:this._id},fields);
     }
     else if (Meteor.userId() && this.players && _.contains(this.players,Meteor.userId())) {
       Router.go('play',{_id:this._id});
