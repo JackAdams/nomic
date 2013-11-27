@@ -6,4 +6,10 @@
     <li>{{emailAddress}}</li>
     {{/each}}
   </ul>
+  <h1>Rules:</h1>
+  <ul>
+    {{#each rules}}
+    <li>{{>showRule}}</li>
+    {{/each}}
+  </ol>
 </template>

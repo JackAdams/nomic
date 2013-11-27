@@ -20,8 +20,10 @@ Template.games_list.events({
     evt.preventDefault();
     var name = $(evt.currentTarget).find('input').val();
     check(name,String);
-    if (name) {
-      Games.insert({name:name}); 
+    if (name) { 
+      Meteor.call("createGame",name,function() {
+        
+      });
     }
     $(evt.currentTarget).find('input').val('');
   }

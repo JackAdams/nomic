@@ -10,16 +10,30 @@ Games.allow({
     if (_.contains(fields,'players')) {
       return Nomic.canJoinGame();
     }
-    if (_.contains(fields,'status')) {
-      return Nomic.canStartGame(doc);
-    }
   }
   
 });
 
-// The following is only possible due to the collection-hooks smart package
-Games.before.insert(function(userId,doc) {
-  doc.createdAt = Date.now();
-  doc.owner = userId;
-  doc.status = "open"; // "started" and "finished" are the other statuses
+Meteor.methods({
+  'createGame' : function(name) {
+    var doc = {name:name};
+    doc.createdAt = Date.now();
+    doc.owner = Meteor.userId();
+    doc.status = "open"; // "started" and "finished" are the other statuses
+    var game_id = Games.insert(doc);
+    // Add rules here
+    if (Meteor.isServer) {
+      _.each(Nomic.rules, function(rule) {
+        rule.game_id = game_id;
+        console.log("rule id:",Rules.insert(rule));
+      });
+    }
+  },
+  'startGame' : function(game_id) {
+    var doc = Games.findOne({_id:game_id},{fields:{owner:1,status:1,players:1}});
+    if (!Nomic.canStartGame(doc)) {
+      return;
+    }
+    Games.update({_id:game_id},{$set:{status:'started'}}); 
+  }
 });

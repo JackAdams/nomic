@@ -6,6 +6,7 @@ Meteor.publish('game', function(_id) {
   var game = Games.findOne({_id:_id});
   return [
     Games.find({_id:_id}),
-    Meteor.users.find({_id:{$in:game.players}},{fields:{"emails.address":1}})
-    ];
+    Meteor.users.find({_id:{$in:game.players}},{fields:{"emails.address":1}}),
+    Rules.find({game_id:_id})
+  ];
 });

@@ -42,7 +42,11 @@ Template.game.events({
   },
   
   'click button' : function() {
-    Games.update({_id:this._id},{$set:{status:'started'}}); 
+    Meteor.call('startGame',this._id, function(err,res) {
+      if (err) {
+        console.log(err); 
+      }
+    });
   }
   
 });
